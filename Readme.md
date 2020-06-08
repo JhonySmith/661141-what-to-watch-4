@@ -1,7 +1,7 @@
 # Личный проект «Что посмотреть» [![Build status][travis-image]][travis-url]
 
 * Студент: [Евгений Веснин](https://up.htmlacademy.ru/react/4/user/661141).
-* Наставник: `Неизвестно`.
+* Наставник: [Максим Чеченёв](https://htmlacademy.ru/profile/id1507573).
 
 ---
 

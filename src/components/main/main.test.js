@@ -20,6 +20,7 @@ describe(`Main page unit tests`, () => {
             promoGenre={TestData.PROMO_FILM.PROMO_GENRE}
             promoReleaseDate={TestData.PROMO_FILM.PROMO_DATE_RELEASE}
             films={TestData.FILMS}
+            titleClickHandler={() => {}}
           />
       ).toJSON();
 

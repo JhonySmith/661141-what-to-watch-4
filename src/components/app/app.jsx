@@ -3,11 +3,13 @@ import PropTypes from "prop-types";
 
 import Main from "../main/main.jsx";
 
+const titleClickHandler = () => {};
+
 const App = (props) => {
 
   const {promoTitle, promoGenre, promoReleaseDate, films} = props;
 
-  return <Main promoTitle={promoTitle} promoGenre={promoGenre} promoReleaseDate={promoReleaseDate} films={films} />;
+  return <Main promoTitle={promoTitle} promoGenre={promoGenre} promoReleaseDate={promoReleaseDate} films={films} titleClickHandler={titleClickHandler} />;
 };
 
 export default App;

@@ -8,7 +8,22 @@ const TestData = {
     PROMO_GENRE: `Drama`,
     PROMO_DATE_RELEASE: 2014
   },
-  FILMS: [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`],
+  MOVIES: [
+    {
+      genre: `horror`,
+      title: `Fantastic Beasts: The Crimes of Grindelwald`,
+      previewImage: `https://upload.wikimedia.org/wikipedia/commons/f/f6/70mm_film_print_with_DTS_sound.jpg`
+    },
+    {
+      genre: `Thriller`,
+      title: `Bohemian Rhapsody`,
+      previewImage: `https://upload.wikimedia.org/wikipedia/commons/f/f6/70mm_film_print_with_DTS_sound.jpg`
+    },
+    {
+      genre: `Romance`,
+      title: `Macbeth`,
+      previewImage: `https://upload.wikimedia.org/wikipedia/commons/f/f6/70mm_film_print_with_DTS_sound.jpg`
+    }],
 };
 
 describe(`App unit tests`, () => {
@@ -19,7 +34,7 @@ describe(`App unit tests`, () => {
             promoTitle={TestData.PROMO_FILM.PROMO_TITLE}
             promoGenre={TestData.PROMO_FILM.PROMO_GENRE}
             promoReleaseDate={TestData.PROMO_FILM.PROMO_DATE_RELEASE}
-            films={TestData.FILMS}
+            movies={TestData.MOVIES}
           />
       ).toJSON();
 

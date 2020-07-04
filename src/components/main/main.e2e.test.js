@@ -1,6 +1,6 @@
 
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 import Main from "./main.jsx";
@@ -37,7 +37,7 @@ describe(`Main page e2e tests`, () => {
   it(`Should all titles be pressed`, () => {
     const onTitleClick = jest.fn();
 
-    const main = shallow(
+    const main = mount(
         <Main
           promoTitle={TestData.PROMO_FILM.PROMO_TITLE}
           promoGenre={TestData.PROMO_FILM.PROMO_GENRE}
@@ -47,7 +47,7 @@ describe(`Main page e2e tests`, () => {
         />
     );
 
-    const filmsTitle = main.find(`small-movie-card__link`);
+    const filmsTitle = main.find(`a.small-movie-card__link`);
 
     filmsTitle.forEach((it) => it.simulate(`click`));
 

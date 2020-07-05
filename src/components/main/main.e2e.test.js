@@ -1,6 +1,6 @@
 
 import React from "react";
-import Enzyme, {shallow} from "enzyme";
+import Enzyme, {mount} from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 
 import Main from "./main.jsx";
@@ -15,20 +15,35 @@ const TestData = {
     PROMO_GENRE: `Drama`,
     PROMO_DATE_RELEASE: 2014
   },
-  FILMS: [`Fantastic Beasts`, `Bohemian Rhapsody`, `Macbeth`],
+  MOVIES: [
+    {
+      genre: `horror`,
+      title: `Fantastic Beasts: The Crimes of Grindelwald`,
+      previewImage: `https://upload.wikimedia.org/wikipedia/commons/f/f6/70mm_film_print_with_DTS_sound.jpg`
+    },
+    {
+      genre: `Thriller`,
+      title: `Bohemian Rhapsody`,
+      previewImage: `https://upload.wikimedia.org/wikipedia/commons/f/f6/70mm_film_print_with_DTS_sound.jpg`
+    },
+    {
+      genre: `Romance`,
+      title: `Macbeth`,
+      previewImage: `https://upload.wikimedia.org/wikipedia/commons/f/f6/70mm_film_print_with_DTS_sound.jpg`
+    }],
 };
 
 describe(`Main page e2e tests`, () => {
   it(`Should all titles be pressed`, () => {
-    const titleClickHandler = jest.fn();
+    const onTitleClick = jest.fn();
 
-    const main = shallow(
+    const main = mount(
         <Main
           promoTitle={TestData.PROMO_FILM.PROMO_TITLE}
           promoGenre={TestData.PROMO_FILM.PROMO_GENRE}
           promoReleaseDate={TestData.PROMO_FILM.PROMO_DATE_RELEASE}
-          films={TestData.FILMS}
-          titleClickHandler={titleClickHandler}
+          movies={TestData.MOVIES}
+          onTitleClick={onTitleClick}
         />
     );
 
@@ -36,6 +51,6 @@ describe(`Main page e2e tests`, () => {
 
     filmsTitle.forEach((it) => it.simulate(`click`));
 
-    expect(titleClickHandler.mock.calls.length).toBe(TestData.FILMS.length);
+    expect(onTitleClick.mock.calls.length).toBe(TestData.MOVIES.length);
   });
 });

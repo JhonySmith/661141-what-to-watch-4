@@ -11,23 +11,32 @@ class SmallMovieCard extends PureComponent {
     };
   }
 
+  _onMouseEnter() {
+    const {onMouseHover, movie} = this.props;
+
+    onMouseHover(movie);
+    this.setState({
+      videoIsPlaing: true
+    });
+  }
+
+  _onMouseLeave() {
+    this.setState({
+      videoIsPlaing: false
+    });
+  }
+
   render() {
-    const {onMouseHover, movie, onTitleClick} = this.props;
+    const {movie, onTitleClick} = this.props;
     const {videoIsPlaing} = this.state;
 
     return (
       <article className="small-movie-card catalog__movies-card"
         onMouseEnter = {() => {
-          onMouseHover(movie);
-          this.setState({
-            videoIsPlaing: true
-          });
+          this._onMouseEnter();
         }}
-
         onMouseLeave = {() => {
-          this.setState({
-            videoIsPlaing: false
-          });
+          this._onMouseLeave();
         }}
       >
         <div className="small-movie-card__image">

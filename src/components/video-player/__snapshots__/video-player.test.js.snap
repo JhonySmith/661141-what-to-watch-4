@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Video player snap test Render video player 1`] = `
+<video
+  height="175"
+  poster="https://upload.wikimedia.org/wikipedia/commons/f/f6/70mm_film_print_with_DTS_sound.jpg"
+  type="video/mp4"
+  width="280"
+>
+  Sorry, your browser doesnt support embedded videos.
+</video>
+`;

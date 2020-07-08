@@ -4,16 +4,19 @@ exports[`Movies list unit tests Render movies list 1`] = `
 <article
   className="small-movie-card catalog__movies-card"
   onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
 >
   <div
     className="small-movie-card__image"
   >
-    <img
-      alt="Fantastic Beasts: The Crimes of Grindelwald"
+    <video
       height="175"
-      src="https://upload.wikimedia.org/wikipedia/commons/f/f6/70mm_film_print_with_DTS_sound.jpg"
+      poster="https://upload.wikimedia.org/wikipedia/commons/f/f6/70mm_film_print_with_DTS_sound.jpg"
+      type="video/mp4"
       width="280"
-    />
+    >
+      Sorry, your browser doesnt support embedded videos.
+    </video>
   </div>
   <h3
     className="small-movie-card__title"

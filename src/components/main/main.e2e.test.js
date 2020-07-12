@@ -30,6 +30,11 @@ const TestData = {
     }],
 };
 
+
+const genres = [`All genres`, `Horror`, `Comedies`];
+
+const allGenres = `All genres`;
+
 describe(`Main page e2e tests`, () => {
   it(`Should all titles be pressed`, () => {
     const onTitleClick = jest.fn();
@@ -41,6 +46,9 @@ describe(`Main page e2e tests`, () => {
           promoReleaseDate={TestData.PROMO_FILM.PROMO_DATE_RELEASE}
           movies={TestData.MOVIES}
           onTitleClick={onTitleClick}
+          genres={genres}
+          onGenreClick={() => { }}
+          currentGenre={allGenres}
         />
     );
 

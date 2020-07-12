@@ -23,6 +23,10 @@ const TestData = {
     }],
 };
 
+const genres = [`All genres`, `Horror`, `Comedies`];
+
+const allGenres = `All genres`;
+
 describe(`Main page unit tests`, () => {
   it(`Render main page`, () => {
     const tree = renderer
@@ -33,6 +37,9 @@ describe(`Main page unit tests`, () => {
             promoReleaseDate={TestData.PROMO_FILM.PROMO_DATE_RELEASE}
             movies={TestData.MOVIES}
             onTitleClick={() => {}}
+            genres={genres}
+            onGenreClick={() => { }}
+            currentGenre={allGenres}
           />, {
             createNodeMock: () => {
               return {};

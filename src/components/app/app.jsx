@@ -1,18 +1,28 @@
-import React from "react";
+import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
+import {connect} from 'react-redux';
+import {ActionCreator} from "../../reducer.js";
 
 import Main from "../main/main.jsx";
 
 const onTitleClick = () => {};
 
-const App = (props) => {
+class App extends PureComponent {
+  render() {
+    const {promoTitle, promoGenre, promoReleaseDate, movies, genres, currentGenre, onGenreClick} = this.props;
 
-  const {promoTitle, promoGenre, promoReleaseDate, movies} = props;
-
-  return <Main promoTitle={promoTitle} promoGenre={promoGenre} promoReleaseDate={promoReleaseDate} movies={movies} onTitleClick={onTitleClick} />;
-};
-
-export default App;
+    return <Main
+      promoTitle={promoTitle}
+      promoGenre={promoGenre}
+      promoReleaseDate={promoReleaseDate}
+      movies={movies}
+      genres={genres}
+      onGenreClick={onGenreClick}
+      currentGenre={currentGenre}
+      onTitleClick={onTitleClick}
+    />;
+  }
+}
 
 App.propTypes = {
   promoTitle: PropTypes.string.isRequired,
@@ -26,4 +36,23 @@ App.propTypes = {
           }
       ).isRequired
   ).isRequired,
+  genres: PropTypes.array.isRequired,
+  currentGenre: PropTypes.string,
+  onGenreClick: PropTypes.func
 };
+
+const mapStateToProps = (state) => ({
+  movies: state.moviesByFilter,
+  genres: state.genres,
+  currentGenre: state.currentGenre,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onGenreClick(genre) {
+    dispatch(ActionCreator.setCurrentGenre(genre));
+    dispatch(ActionCreator.getMoviesByGenre(genre));
+  },
+});
+
+export {App};
+export default connect(mapStateToProps, mapDispatchToProps)(App);

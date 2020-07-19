@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`With-video snap tests With video hoc render correctly 1`] = `
+<div>
+  <video
+    height="175"
+    poster="https://upload.wikimedia.org/wikipedia/commons/f/f6/70mm_film_print_with_DTS_sound.jpg"
+    type="video/mp4"
+    width="280"
+  >
+    Sorry, your browser doesnt support embedded videos.
+  </video>
+</div>
+`;

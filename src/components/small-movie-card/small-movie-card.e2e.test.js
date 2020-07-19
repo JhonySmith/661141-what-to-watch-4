@@ -1,5 +1,5 @@
 import React from 'react';
-import Enzyme, {shallow} from 'enzyme';
+import Enzyme, {mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import SmallMovieCard from './small-movie-card.jsx';
 
@@ -18,16 +18,16 @@ describe(`SmallMovieCard`, () => {
   it(`Should SmallMovieCard hovered`, () => {
     const onMouseHover = jest.fn();
 
-    const main = shallow(
+    const main = mount(
         <SmallMovieCard
           movie={movie}
           onMouseHover={onMouseHover}
+          muted={true}
           onTitleClick={() => { }}
         />
     );
 
-    const movieCard = main.find(`.small-movie-card`);
-    movieCard.simulate(`mouseenter`, movie);
-    expect(onMouseHover).toHaveBeenCalledWith(movie);
+    main.props().onMouseHover();
+    expect(onMouseHover.mock.calls.length).toBe(1);
   });
 });

@@ -1,21 +1,14 @@
-import React, {PureComponent} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import MoviesList from "../movies-list/movies-list.jsx";
 import GenreList from "../genre-list/genre-list.jsx";
 
 
-class Main extends PureComponent {
-  constructor(props) {
-    super(props);
+const Main = (props) => {
+  const {promoTitle, promoGenre, promoReleaseDate, movies, genres, currentGenre, onGenreClick, onTitleClick} = props;
 
-  }
-
-  render() {
-
-    const {promoTitle, promoGenre, promoReleaseDate, movies, genres, currentGenre, onGenreClick, onTitleClick} = this.props;
-
-    return (
+  return (
       <>
         <div className="visually-hidden">
           {/* inject:svg */}<svg xmlnsXlink="http://www.w3.org/2000/svg">
@@ -136,9 +129,8 @@ class Main extends PureComponent {
           </footer>
         </div>
       </>
-    );
-  }
-}
+  );
+};
 
 export default Main;
 

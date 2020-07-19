@@ -16,7 +16,7 @@ describe(`Movies list unit tests`, () => {
       .create(
           <SmallMovieCard
             movie={movie}
-            onMouseHover={() => {}}
+            muted={true}
             onTitleClick={() => {}}
           />, {
             createNodeMock: () => {

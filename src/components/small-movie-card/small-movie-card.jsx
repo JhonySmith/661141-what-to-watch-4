@@ -29,7 +29,7 @@ SmallMovieCard.propTypes = {
   movie: PropTypes.shape({
     title: PropTypes.string.isRequired,
     previewImage: PropTypes.string.isRequired,
-    previewVideo: PropTypes.string.isRequired
+    previewVideo: PropTypes.string.isRequired,
   }).isRequired,
   onTitleClick: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,

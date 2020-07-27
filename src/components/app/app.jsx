@@ -2,25 +2,77 @@ import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from 'react-redux';
 import {ActionCreator} from "../../reducer.js";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
 
 import Main from "../main/main.jsx";
+import MoviePage from "../movie-page/movie-page.jsx";
 
-const onTitleClick = () => {};
+const ShowingPage = {
+  MAIN: `main`,
+  DETAILS: `deatils`
+};
 
 class App extends PureComponent {
-  render() {
-    const {promoTitle, promoGenre, promoReleaseDate, movies, genres, currentGenre, onGenreClick} = this.props;
+  constructor(props) {
+    super(props);
 
-    return <Main
-      promoTitle={promoTitle}
-      promoGenre={promoGenre}
-      promoReleaseDate={promoReleaseDate}
-      movies={movies}
-      genres={genres}
-      onGenreClick={onGenreClick}
-      currentGenre={currentGenre}
-      onTitleClick={onTitleClick}
-    />;
+    this.state = {
+      showingPage: ShowingPage.MAIN
+    };
+
+    this._movieDetails = null;
+
+    this._openMovieDetails = this._openMovieDetails.bind(this);
+  }
+
+  _openMovieDetails(movie) {
+    this.setState({
+      showingPage: ShowingPage.DETAILS
+    });
+
+    this._movieDetails = movie;
+  }
+
+  _renderApp() {
+    const {promoTitle, promoGenre, promoReleaseDate, movies, genres, currentGenre, onGenreClick} = this.props;
+    const {showingPage} = this.state;
+
+    if (showingPage === ShowingPage.DETAILS) {
+      return (
+        <MoviePage
+          movie={this._movieDetails}
+        />
+      );
+    }
+
+    return (
+      <Main
+        promoTitle={promoTitle}
+        promoGenre={promoGenre}
+        promoReleaseDate={promoReleaseDate}
+        movies={movies}
+        genres={genres}
+        onGenreClick={onGenreClick}
+        currentGenre={currentGenre}
+        onTitleClick={this._openMovieDetails}
+      />
+    );
+  }
+
+  render() {
+
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/">
+            {this._renderApp()}
+          </Route>
+          <Route exact path="/movie-page">
+            <MoviePage />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    );
   }
 }
 

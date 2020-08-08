@@ -117,7 +117,7 @@ Array [
     >
       <img
         alt="The Grand Budapest Hotel"
-        src="img/bg-the-grand-budapest-hotel.jpg"
+        src="https://upload.wikimedia.org/wikipedia/commons/e/eb/FSC-R-logobackground_green.png"
       />
     </div>
     <h1
@@ -176,9 +176,9 @@ Array [
           className="movie-card__poster"
         >
           <img
-            alt="The Grand Budapest Hotel poster"
+            alt="The Grand Budapest Hotel"
             height="327"
-            src="img/the-grand-budapest-hotel-poster.jpg"
+            src="https://upload.wikimedia.org/wikipedia/commons/e/eb/FSC-R-logobackground_green.png"
             width="218"
           />
         </div>

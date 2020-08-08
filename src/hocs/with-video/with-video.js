@@ -41,8 +41,8 @@ const withVideo = (Component) => {
         >
           <video width="280" height="175"
             ref={this._videoRef}
-            type={this._typeDefine(movie.previewVideo)}
-            poster={movie.previewImage}>
+            type={this._typeDefine(movie.preview)}
+            poster={movie.image}>
             Sorry, your browser doesnt support embedded videos.
           </video>
         </Component>
@@ -57,7 +57,7 @@ const withVideo = (Component) => {
       const {movie, muted} = this.props;
       const video = this._videoRef.current;
 
-      video.src = movie.previewVideo;
+      video.src = movie.preview;
       video.muted = muted;
     }
 
@@ -85,8 +85,8 @@ const withVideo = (Component) => {
 
   WithVideo.propTypes = {
     movie: PropTypes.shape({
-      previewImage: PropTypes.string.isRequired,
-      previewVideo: PropTypes.string.isRequired
+      image: PropTypes.string.isRequired,
+      preview: PropTypes.string.isRequired
     }).isRequired,
     muted: PropTypes.bool.isRequired
   };

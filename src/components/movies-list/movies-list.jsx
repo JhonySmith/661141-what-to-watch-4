@@ -25,7 +25,7 @@ MoviesList.propTypes = {
       PropTypes.shape(
           {
             title: PropTypes.string.isRequired,
-            previewImage: PropTypes.string.isRequired
+            image: PropTypes.string.isRequired
           }
       ).isRequired
   ).isRequired,

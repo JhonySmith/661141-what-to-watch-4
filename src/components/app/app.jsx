@@ -1,8 +1,11 @@
 import React, {PureComponent} from "react";
 import PropTypes from "prop-types";
 import {connect} from 'react-redux';
-import {ActionCreator} from "../../reducer.js";
+import {ActionCreator} from "../../reducer/state/state";
+import {getMovies, getAllGenres, getPromoMovie} from "../../reducer/movies/selectors";
+import {getCurrentGenre} from "../../reducer/state/selectors";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
+import filters from "../../constants/filters";
 
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
@@ -34,7 +37,7 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {promoTitle, promoGenre, promoReleaseDate, movies, genres, currentGenre, onGenreClick} = this.props;
+    const {movies, genres, promoMovie, currentGenre, onGenreClick} = this.props;
     const {showingPage} = this.state;
 
     if (showingPage === ShowingPage.DETAILS) {
@@ -47,11 +50,9 @@ class App extends PureComponent {
 
     return (
       <Main
-        promoTitle={promoTitle}
-        promoGenre={promoGenre}
-        promoReleaseDate={promoReleaseDate}
-        movies={movies}
+        movies={currentGenre !== filters.ALL ? movies.filter((movie) => movie.genre === currentGenre) : movies}
         genres={genres}
+        promoMovie={promoMovie}
         onGenreClick={onGenreClick}
         currentGenre={currentGenre}
         onTitleClick={this._openMovieDetails}
@@ -77,14 +78,12 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  promoTitle: PropTypes.string.isRequired,
-  promoGenre: PropTypes.string.isRequired,
-  promoReleaseDate: PropTypes.number.isRequired,
+  promoMovie: PropTypes.shape().isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape(
           {
             title: PropTypes.string.isRequired,
-            previewImage: PropTypes.string.isRequired
+            image: PropTypes.string.isRequired
           }
       ).isRequired
   ).isRequired,
@@ -94,15 +93,15 @@ App.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  movies: state.moviesByFilter,
-  genres: state.genres,
-  currentGenre: state.currentGenre,
+  movies: getMovies(state),
+  promoMovie: getPromoMovie(state),
+  genres: getAllGenres(state),
+  currentGenre: getCurrentGenre(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreClick(genre) {
     dispatch(ActionCreator.setCurrentGenre(genre));
-    dispatch(ActionCreator.getMoviesByGenre(genre));
   },
 });
 

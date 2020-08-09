@@ -6,7 +6,7 @@ import GenreList from "../genre-list/genre-list.jsx";
 
 
 const Main = (props) => {
-  const {promoTitle, promoGenre, promoReleaseDate, movies, genres, currentGenre, onGenreClick, onTitleClick} = props;
+  const {promoMovie, movies, genres, currentGenre, onGenreClick, onTitleClick} = props;
 
   return (
       <>
@@ -41,7 +41,7 @@ const Main = (props) => {
 
         <section className="movie-card">
           <div className="movie-card__bg">
-            <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+            <img src={promoMovie.backgroundPoster} alt={promoMovie.title} />
           </div>
 
           <h1 className="visually-hidden">WTW</h1>
@@ -65,14 +65,14 @@ const Main = (props) => {
           <div className="movie-card__wrap">
             <div className="movie-card__info">
               <div className="movie-card__poster">
-                <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+                <img src={promoMovie.filmPoster} alt={promoMovie.title} width="218" height="327" />
               </div>
 
               <div className="movie-card__desc">
-                <h2 className="movie-card__title">{promoTitle}</h2>
+                <h2 className="movie-card__title">{promoMovie.title}</h2>
                 <p className="movie-card__meta">
-                  <span className="movie-card__genre">{promoGenre}</span>
-                  <span className="movie-card__year">{promoReleaseDate}</span>
+                  <span className="movie-card__genre">{promoMovie.genre}</span>
+                  <span className="movie-card__year">{promoMovie.year}</span>
                 </p>
 
                 <div className="movie-card__buttons">
@@ -132,23 +132,29 @@ const Main = (props) => {
   );
 };
 
-export default Main;
-
 Main.propTypes = {
-  promoTitle: PropTypes.string.isRequired,
-  promoGenre: PropTypes.string.isRequired,
-  promoReleaseDate: PropTypes.number.isRequired,
+  promoMovie: PropTypes.shape(
+      {
+        title: PropTypes.string.isRequired,
+        filmPoster: PropTypes.string.isRequired,
+        genre: PropTypes.string.isRequired,
+        year: PropTypes.number.isRequired,
+        backgroundPoster: PropTypes.string.isRequired,
+      }
+  ).isRequired,
   movies: PropTypes.arrayOf(
       PropTypes.shape(
           {
             title: PropTypes.string.isRequired,
-            previewImage: PropTypes.string.isRequired
+            image: PropTypes.string.isRequired
           }
       ).isRequired
   ).isRequired,
   onTitleClick: PropTypes.func.isRequired,
   filters: PropTypes.array,
   genres: PropTypes.array.isRequired,
-  currentGenre: PropTypes.string.isRequired,
-  onGenreClick: PropTypes.func.isRequired
+  onGenreClick: PropTypes.func.isRequired,
+  currentGenre: PropTypes.string.isRequired
 };
+
+export default Main;

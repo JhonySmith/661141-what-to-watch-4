@@ -5,10 +5,10 @@ import withVideo from "./with-video.js";
 
 const movie =
 {
-  genre: `horror`,
   title: `Fantastic Beasts: The Crimes of Grindelwald`,
-  previewImage: `https://upload.wikimedia.org/wikipedia/commons/f/f6/70mm_film_print_with_DTS_sound.jpg`,
-  previewVideo: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`
+  image: `https://upload.wikimedia.org/wikipedia/commons/f/f6/70mm_film_print_with_DTS_sound.jpg`,
+  preview: `https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4`,
+  genre: `horror`,
 };
 
 const MockComponent = (props) => {

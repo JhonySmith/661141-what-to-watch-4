@@ -12,7 +12,7 @@ Array [
         className="movie-card__bg"
       >
         <img
-          alt="The Grand Budapest Hotel"
+          alt="Fantastic Beasts: The Crimes of Grindelwald"
           src="img/bg-the-grand-budapest-hotel.jpg"
         />
       </div>
@@ -219,23 +219,22 @@ Array [
             className="movie-card__text"
           >
             <p>
-              In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\`s friend and protege.
-            </p>
-            <p>
-              Gustave prides himself on providing first-class service to the hotel\`s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave\`s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.
+              Fantastic Beasts: The Crimes of Grindelwald
             </p>
             <p
               className="movie-card__director"
             >
               <strong>
-                Director: Wes Andreson
+                Director: 
+                Horrors
               </strong>
             </p>
             <p
               className="movie-card__starring"
             >
               <strong>
-                Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other
+                Starring: 
+                Fantastic Beasts: The Crimes of Grindelwald
               </strong>
             </p>
           </div>

@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import MoviePageTabs from "../movie-page-tabs/movie-page-tabs.jsx";
 
 const MoviePage = (props) => {
-  const {movie} = props;
+  const {movie, movies} = props;
 
   return (
       <>
@@ -68,35 +69,9 @@ const MoviePage = (props) => {
               </div>
 
               <div className="movie-card__desc">
-                <nav className="movie-nav movie-card__nav">
-                  <ul className="movie-nav__list">
-                    <li className="movie-nav__item movie-nav__item--active">
-                      <a href="#" className="movie-nav__link">Overview</a>
-                    </li>
-                    <li className="movie-nav__item">
-                      <a href="#" className="movie-nav__link">Details</a>
-                    </li>
-                    <li className="movie-nav__item">
-                      <a href="#" className="movie-nav__link">Reviews</a>
-                    </li>
-                  </ul>
-                </nav>
-
-                <div className="movie-rating">
-                  <div className="movie-rating__score">8,9</div>
-                  <p className="movie-rating__meta">
-                    <span className="movie-rating__level">Very good</span>
-                    <span className="movie-rating__count">240 ratings</span>
-                  </p>
-                </div>
-
-                <div className="movie-card__text">
-                  <p>{movie.description}</p>
-
-                  <p className="movie-card__director"><strong>Director: {movie.director}</strong></p>
-
-                  <p className="movie-card__starring"><strong>Starring: {movie.starring}</strong></p>
-                </div>
+                <MoviePageTabs
+                  movie={movie}
+                />
               </div>
             </div>
           </div>
@@ -107,41 +82,25 @@ const MoviePage = (props) => {
             <h2 className="catalog__title">More like this</h2>
 
             <div className="catalog__movies-list">
-              <article className="small-movie-card catalog__movies-card">
-                <div className="small-movie-card__image">
-                  <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-                </div>
-                <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href="movie-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-                </h3>
-              </article>
+              {
+                movies
+                .filter((mov) => (mov.genre === movie.genre) && (mov !== movie))
+                .slice(0, 4)
+                .map((sameMovie) => {
+                  return (
+                    <article key={sameMovie.id} className="small-movie-card catalog__movies-card">
+                      <div className="small-movie-card__image">
+                        <img src={sameMovie.image} alt={sameMovie.title} width="280" height="175" />
+                      </div>
+                      <h3 className="small-movie-card__title">
+                        <a className="small-movie-card__link" href="movie-page.html">{sameMovie.title}</a>
+                      </h3>
+                    </article>
+                  );
 
-              <article className="small-movie-card catalog__movies-card">
-                <div className="small-movie-card__image">
-                  <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-                </div>
-                <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href="movie-page.html">Bohemian Rhapsody</a>
-                </h3>
-              </article>
+                })
+              }
 
-              <article className="small-movie-card catalog__movies-card">
-                <div className="small-movie-card__image">
-                  <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-                </div>
-                <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href="movie-page.html">Macbeth</a>
-                </h3>
-              </article>
-
-              <article className="small-movie-card catalog__movies-card">
-                <div className="small-movie-card__image">
-                  <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-                </div>
-                <h3 className="small-movie-card__title">
-                  <a className="small-movie-card__link" href="movie-page.html">Aviator</a>
-                </h3>
-              </article>
             </div>
           </section>
 
@@ -173,8 +132,14 @@ MoviePage.propTypes = {
     year: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
-    starring: PropTypes.string.isRequired
-  }),
+    starring: PropTypes.array.isRequired
+  }).isRequired,
+  movies: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    image: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    filter: PropTypes.func
+  }))
 };
 
 export default MoviePage;

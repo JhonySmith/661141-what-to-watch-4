@@ -44,6 +44,7 @@ class App extends PureComponent {
       return (
         <MoviePage
           movie={this._movieDetails}
+          movies={movies}
         />
       );
     }

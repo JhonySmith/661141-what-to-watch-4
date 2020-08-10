@@ -37,12 +37,9 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {movies, genres, promoMovie, currentGenre, onGenreClick, currentShowNumber} = this.props;
+    const {movies, genres, promoMovie, currentGenre, onGenreClick, currentShowNumber, onShowMoreClick} = this.props;
     const {showingPage} = this.state;
     const showingMovies = (currentGenre !== filters.ALL ? movies.filter((movie) => movie.genre === currentGenre) : movies);
-
-    console.log(currentShowNumber);
-    console.log(showingMovies);
 
     if (showingPage === ShowingPage.DETAILS) {
       return (
@@ -62,6 +59,8 @@ class App extends PureComponent {
         onGenreClick={onGenreClick}
         currentGenre={currentGenre}
         onTitleClick={this._openMovieDetails}
+        currentShowNumber={currentShowNumber}
+        onShowMoreClick={onShowMoreClick}
       />
     );
   }
@@ -95,7 +94,9 @@ App.propTypes = {
   ).isRequired,
   genres: PropTypes.array.isRequired,
   currentGenre: PropTypes.string,
-  onGenreClick: PropTypes.func
+  onGenreClick: PropTypes.func,
+  currentShowNumber: PropTypes.number,
+  onShowMoreClick: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
@@ -111,6 +112,9 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(ActionCreator.setCurrentGenre(genre));
     dispatch(ActionCreator.setShowNumberByDefault());
   },
+  onShowMoreClick(currentShowNumber) {
+    dispatch(ActionCreator.increaseShowNumber(currentShowNumber));
+  }
 });
 
 export {App};

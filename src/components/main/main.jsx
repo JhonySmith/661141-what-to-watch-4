@@ -7,7 +7,7 @@ import ShowMoreButton from "../show-more-button/show-more-button.jsx";
 
 
 const Main = (props) => {
-  const {promoMovie, movies, genres, currentGenre, onGenreClick, onTitleClick, showingMovies} = props;
+  const {promoMovie, movies, genres, currentGenre, onGenreClick, onTitleClick, showingMovies, currentShowNumber, onShowMoreClick} = props;
 
   return (
     <>
@@ -113,6 +113,8 @@ const Main = (props) => {
           <div className="catalog__more">
             <ShowMoreButton
               movies={movies}
+              currentShowNumber={currentShowNumber}
+              onShowMoreClick={onShowMoreClick}
             />
           </div>
         </section>
@@ -153,6 +155,16 @@ Main.propTypes = {
           }
       ).isRequired
   ).isRequired,
+  showingMovies: PropTypes.arrayOf(
+      PropTypes.shape(
+          {
+            title: PropTypes.string.isRequired,
+            image: PropTypes.string.isRequired
+          }
+      ).isRequired
+  ).isRequired,
+  currentShowNumber: PropTypes.number.isRequired,
+  onShowMoreClick: PropTypes.func.isRequired,
   onTitleClick: PropTypes.func.isRequired,
   filters: PropTypes.array,
   genres: PropTypes.array.isRequired,

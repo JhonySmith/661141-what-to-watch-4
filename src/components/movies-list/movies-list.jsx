@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import {SmallVideoSize} from "../../constants/video.js";
 
 import SmallMovieCard from "../small-movie-card/small-movie-card.jsx";
 
@@ -14,6 +15,8 @@ const MoviesList = (props) => {
           movie={movie}
           muted={true}
           onTitleClick={onTitleClick}
+          videoWidth={SmallVideoSize.WIDTH}
+          videoHeight={SmallVideoSize.HEIGHT}
         />
       ))}
     </div>

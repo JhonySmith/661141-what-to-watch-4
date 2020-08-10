@@ -6,13 +6,15 @@ import {getMovies, getAllGenres, getPromoMovie} from "../../reducer/movies/selec
 import {getCurrentGenre, getCurrentShowNumber} from "../../reducer/state/selectors";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import filters from "../../constants/filters";
+import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 
 const ShowingPage = {
   MAIN: `main`,
-  DETAILS: `deatils`
+  DETAILS: `deatils`,
+  FULL_VIDEO: `fullVideo`
 };
 
 class App extends PureComponent {
@@ -24,8 +26,10 @@ class App extends PureComponent {
     };
 
     this._movieDetails = null;
+    this._movieVideo = null;
 
     this._openMovieDetails = this._openMovieDetails.bind(this);
+    this._openFullVideo = this._openFullVideo.bind(this);
   }
 
   _openMovieDetails(movie) {
@@ -34,6 +38,14 @@ class App extends PureComponent {
     });
 
     this._movieDetails = movie;
+  }
+
+  _openFullVideo(movie) {
+    this.setState({
+      showingPage: ShowingPage.FULL_VIDEO
+    });
+
+    this._movieVideo = movie;
   }
 
   _renderApp() {
@@ -50,6 +62,14 @@ class App extends PureComponent {
       );
     }
 
+    if (showingPage === ShowingPage.FULL_VIDEO) {
+      return (
+        <FullVideoPlayer
+          movie={this._movieVideo}
+        />
+      );
+    }
+
     return (
       <Main
         showingMovies={showingMovies.slice(0, currentShowNumber)}
@@ -61,6 +81,7 @@ class App extends PureComponent {
         onTitleClick={this._openMovieDetails}
         currentShowNumber={currentShowNumber}
         onShowMoreClick={onShowMoreClick}
+        onPlayVideoClick={this._openFullVideo}
       />
     );
   }
@@ -75,6 +96,9 @@ class App extends PureComponent {
           </Route>
           <Route exact path="/movie-page">
             <MoviePage />
+          </Route>
+          <Route exact path="/movie-video">
+            <FullVideoPlayer />
           </Route>
         </Switch>
       </BrowserRouter>

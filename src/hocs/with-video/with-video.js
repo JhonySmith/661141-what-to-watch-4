@@ -31,7 +31,7 @@ const withVideo = (Component) => {
     }
 
     render() {
-      const {movie} = this.props;
+      const {movie, videoWidth, videoHeight} = this.props;
 
       return (
         <Component
@@ -39,7 +39,7 @@ const withVideo = (Component) => {
           onPlay={this._handlePlay}
           onPause={this._handlePause}
         >
-          <video width="280" height="175"
+          <video width={videoWidth} height={videoHeight}
             ref={this._videoRef}
             type={this._typeDefine(movie.preview)}
             poster={movie.image}>
@@ -88,7 +88,9 @@ const withVideo = (Component) => {
       image: PropTypes.string.isRequired,
       preview: PropTypes.string.isRequired
     }).isRequired,
-    muted: PropTypes.bool.isRequired
+    muted: PropTypes.bool.isRequired,
+    videoWidth: PropTypes.number,
+    videoHeight: PropTypes.number
   };
 
   return WithVideo;

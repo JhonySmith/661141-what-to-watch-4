@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import withFullVideo from "../../hocs/with-full-video/with-full-video.js";
+import {getTimeEnd} from "../../utils/get-time-end.js";
 
 const FullVideoPlayer = (props) => {
   const {movie, onPlay, isPlaying, progress, duration, valueCount} = props;
@@ -18,7 +19,7 @@ const FullVideoPlayer = (props) => {
               <progress className="player__progress" value={valueCount} max="100"></progress>
               <div className="player__toggler" style={{left: valueCount + `%`}}>Toggler</div>
             </div>
-            <div className="player__time-value">{progress + `/` + duration}</div>
+            <div className="player__time-value">{getTimeEnd(duration, progress)}</div>
           </div>
 
           <div className="player__controls-row">

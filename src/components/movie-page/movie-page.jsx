@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import MoviePageTabs from "../movie-page-tabs/movie-page-tabs.jsx";
 
 const MoviePage = (props) => {
-  const {movie, movies} = props;
+  const {movie, movies, onPlayVideoClick} = props;
 
   return (
       <>
@@ -42,7 +42,12 @@ const MoviePage = (props) => {
 
                 <div className="movie-card__buttons">
 
-                  <button className="btn btn--play movie-card__button" type="button">
+                  <button className="btn btn--play movie-card__button" type="button"
+                    onClick={(evt) => {
+                      evt.preventDefault();
+                      onPlayVideoClick(movie);
+                    }}
+                  >
                     <svg viewBox="0 0 19 19" width="19" height="19">
                       <use xlinkHref="#play-s"></use>
                     </svg>
@@ -139,7 +144,8 @@ MoviePage.propTypes = {
     image: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     filter: PropTypes.func
-  }))
+  })),
+  onPlayVideoClick: PropTypes.func
 };
 
 export default MoviePage;

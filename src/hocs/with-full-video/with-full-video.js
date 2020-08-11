@@ -11,36 +11,36 @@ const withVideo = (Component) => {
 
       this.state = {
         progress: 0,
-        isPlaying: false
+        isPlaying: false,
+        duration: 0,
+        valueCount: 0
       };
 
-      this._handleStop = this._handleStop.bind(this);
       this._handlePlay = this._handlePlay.bind(this);
     }
 
     _handlePlay() {
       this.setState({
-        isPlaying: true
-      });
-    }
-
-    _handleStop() {
-      this.setState({
-        isPlaying: false
+        isPlaying: !this.state.isPlaying
       });
     }
 
     render() {
-      const {movie, videoWidth, videoHeight} = this.props;
-      const {isPlaing} = this.state;
+      const {movie} = this.props;
+      const {isPlaying, progress, duration, valueCount} = this.state;
 
       return (
         <Component
           {...this.props}
           onPlay={this._handlePlay}
-          onStop={this._handleStop}
+          isPlaying={isPlaying}
+          progress={progress}
+          duration={duration}
+          valueCount={valueCount}
         >
-          <video width={videoWidth} height={videoHeight}
+          <video
+            width={100 + `%`}
+            height={100 + `%`}
             ref={this._videoRef}
             type={this._typeDefine(movie.preview)}
             poster={movie.image}>
@@ -58,8 +58,17 @@ const withVideo = (Component) => {
       const {movie, muted} = this.props;
       const video = this._videoRef.current;
 
+
       video.src = movie.preview;
       video.muted = muted;
+
+      video.ontimeupdate = () => {
+        this.setState({
+          progress: Math.floor(video.currentTime),
+          duration: Math.floor(video.duration),
+          valueCount: (this.state.progress * 100 / this.state.duration).toString()
+        });
+      };
     }
 
     componentWillUnmount() {
@@ -76,10 +85,9 @@ const withVideo = (Component) => {
       const video = this._videoRef.current;
 
       if (this.state.isPlaying) {
-        this._timeout = setTimeout(() => video.play(), 1000);
+        video.play();
       } else {
-        clearTimeout(this._timeout);
-        video.load();
+        video.pause();
       }
     }
   }
@@ -90,8 +98,6 @@ const withVideo = (Component) => {
       preview: PropTypes.string.isRequired
     }).isRequired,
     muted: PropTypes.bool,
-    videoWidth: PropTypes.number,
-    videoHeight: PropTypes.number
   };
 
   return WithVideo;

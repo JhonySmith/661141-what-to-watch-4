@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import withVideo from "../../hocs/with-video/with-video.js";
 
 const SmallMovieCard = (props) => {
-  const {onPlay, onPause, movie, onTitleClick} = props;
+  const {onPlay, onStop, movie, onTitleClick} = props;
 
   return (
     <article className="small-movie-card catalog__movies-card"
       onMouseEnter={onPlay}
-      onMouseLeave={onPause}
+      onMouseLeave={onStop}
     >
       <div className="small-movie-card__image">
         {props.children}
@@ -32,7 +32,7 @@ SmallMovieCard.propTypes = {
   onTitleClick: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
   onPlay: PropTypes.func.isRequired,
-  onPause: PropTypes.func.isRequired
+  onStop: PropTypes.func.isRequired
 };
 
 export {SmallMovieCard};

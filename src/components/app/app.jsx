@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {connect} from 'react-redux';
 import {ActionCreator} from "../../reducer/state/state";
 import {getMovies, getAllGenres, getPromoMovie} from "../../reducer/movies/selectors";
-import {getCurrentGenre} from "../../reducer/state/selectors";
+import {getCurrentGenre, getCurrentShowNumber} from "../../reducer/state/selectors";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import filters from "../../constants/filters";
 
@@ -37,8 +37,9 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {movies, genres, promoMovie, currentGenre, onGenreClick} = this.props;
+    const {movies, genres, promoMovie, currentGenre, onGenreClick, currentShowNumber, onShowMoreClick} = this.props;
     const {showingPage} = this.state;
+    const showingMovies = (currentGenre !== filters.ALL ? movies.filter((movie) => movie.genre === currentGenre) : movies);
 
     if (showingPage === ShowingPage.DETAILS) {
       return (
@@ -51,12 +52,15 @@ class App extends PureComponent {
 
     return (
       <Main
-        movies={currentGenre !== filters.ALL ? movies.filter((movie) => movie.genre === currentGenre) : movies}
+        showingMovies={showingMovies.slice(0, currentShowNumber)}
+        movies={showingMovies}
         genres={genres}
         promoMovie={promoMovie}
         onGenreClick={onGenreClick}
         currentGenre={currentGenre}
         onTitleClick={this._openMovieDetails}
+        currentShowNumber={currentShowNumber}
+        onShowMoreClick={onShowMoreClick}
       />
     );
   }
@@ -90,20 +94,27 @@ App.propTypes = {
   ).isRequired,
   genres: PropTypes.array.isRequired,
   currentGenre: PropTypes.string,
-  onGenreClick: PropTypes.func
+  onGenreClick: PropTypes.func,
+  currentShowNumber: PropTypes.number,
+  onShowMoreClick: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({
   movies: getMovies(state),
   promoMovie: getPromoMovie(state),
   genres: getAllGenres(state),
-  currentGenre: getCurrentGenre(state)
+  currentGenre: getCurrentGenre(state),
+  currentShowNumber: getCurrentShowNumber(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onGenreClick(genre) {
     dispatch(ActionCreator.setCurrentGenre(genre));
+    dispatch(ActionCreator.setShowNumberByDefault());
   },
+  onShowMoreClick(currentShowNumber) {
+    dispatch(ActionCreator.increaseShowNumber(currentShowNumber));
+  }
 });
 
 export {App};

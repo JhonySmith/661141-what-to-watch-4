@@ -53,56 +53,53 @@ class App extends PureComponent {
     const {showingPage} = this.state;
     const showingMovies = (currentGenre !== filters.ALL ? movies.filter((movie) => movie.genre === currentGenre) : movies);
 
-    if (showingPage === ShowingPage.DETAILS) {
-      return (
-        <MoviePage
-          movie={this._movieDetails}
-          movies={movies}
-        />
-      );
+    switch (showingPage) {
+      case ShowingPage.DETAILS:
+        return (
+          <MoviePage
+            movie={this._movieDetails}
+            movies={movies}
+          />
+        );
+      case ShowingPage.FULL_VIDEO:
+        return (
+          <FullVideoPlayer
+            movie={this._movieVideo}
+            videoWidth={``}
+            videoHeight={``}
+          />
+        );
+      default:
+        return (
+          <Main
+            showingMovies={showingMovies.slice(0, currentShowNumber)}
+            movies={showingMovies}
+            genres={genres}
+            promoMovie={promoMovie}
+            onGenreClick={onGenreClick}
+            currentGenre={currentGenre}
+            onTitleClick={this._openMovieDetails}
+            currentShowNumber={currentShowNumber}
+            onShowMoreClick={onShowMoreClick}
+            onPlayVideoClick={this._openFullVideo}
+          />);
     }
-
-    if (showingPage === ShowingPage.FULL_VIDEO) {
-      return (
-        <FullVideoPlayer
-          movie={this._movieVideo}
-        />
-      );
-    }
-
-    return (
-      <Main
-        showingMovies={showingMovies.slice(0, currentShowNumber)}
-        movies={showingMovies}
-        genres={genres}
-        promoMovie={promoMovie}
-        onGenreClick={onGenreClick}
-        currentGenre={currentGenre}
-        onTitleClick={this._openMovieDetails}
-        currentShowNumber={currentShowNumber}
-        onShowMoreClick={onShowMoreClick}
-        onPlayVideoClick={this._openFullVideo}
-      />
-    );
   }
 
   render() {
-
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/">
-            {this._renderApp()}
-          </Route>
-          <Route exact path="/movie-page">
-            <MoviePage />
-          </Route>
-          <Route exact path="/movie-video">
-            <FullVideoPlayer />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    );
+    return <BrowserRouter>
+      <Switch>
+        <Route exact path="/">
+          {this._renderApp()}
+        </Route>
+        <Route exact path="/movie-page">
+          <MoviePage />
+        </Route>
+        <Route exact path="/movie-video">
+          <FullVideoPlayer />
+        </Route>
+      </Switch>
+    </BrowserRouter>;
   }
 }
 

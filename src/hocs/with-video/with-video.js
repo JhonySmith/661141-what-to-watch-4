@@ -14,7 +14,7 @@ const withVideo = (Component) => {
         isPlaying: false
       };
 
-      this._handlePause = this._handlePause.bind(this);
+      this._handleStop = this._handleStop.bind(this);
       this._handlePlay = this._handlePlay.bind(this);
     }
 
@@ -24,7 +24,7 @@ const withVideo = (Component) => {
       });
     }
 
-    _handlePause() {
+    _handleStop() {
       this.setState({
         isPlaying: false
       });
@@ -32,12 +32,13 @@ const withVideo = (Component) => {
 
     render() {
       const {movie, videoWidth, videoHeight} = this.props;
+      const {isPlaing} = this.state;
 
       return (
         <Component
           {...this.props}
           onPlay={this._handlePlay}
-          onPause={this._handlePause}
+          onStop={this._handleStop}
         >
           <video width={videoWidth} height={videoHeight}
             ref={this._videoRef}
@@ -88,7 +89,7 @@ const withVideo = (Component) => {
       image: PropTypes.string.isRequired,
       preview: PropTypes.string.isRequired
     }).isRequired,
-    muted: PropTypes.bool.isRequired,
+    muted: PropTypes.bool,
     videoWidth: PropTypes.number,
     videoHeight: PropTypes.number
   };

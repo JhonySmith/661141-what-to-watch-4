@@ -1,9 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
-import withVideo from "../../hocs/with-video/with-video.js";
+import withFullVideo from "../../hocs/with-full-video/with-full-video.js";
 
 const FullVideoPlayer = (props) => {
-  const {movie, onPlay, onPause, isPlaying} = props;
+  const {movie, onPlay, isPlaying, progress, duration, valueCount} = props;
 
   return (
     <>
@@ -15,10 +15,10 @@ const FullVideoPlayer = (props) => {
         <div className="player__controls">
           <div className="player__controls-row">
             <div className="player__time">
-              <progress className="player__progress" value="30" max="100"></progress>
-              <div className="player__toggler" style={{left: 30 + `%`}}>Toggler</div>
+              <progress className="player__progress" value={valueCount} max="100"></progress>
+              <div className="player__toggler" style={{left: valueCount + `%`}}>Toggler</div>
             </div>
-            <div className="player__time-value">1:30:29</div>
+            <div className="player__time-value">{progress + `/` + duration}</div>
           </div>
 
           <div className="player__controls-row">
@@ -27,11 +27,7 @@ const FullVideoPlayer = (props) => {
               className="player__play"
               onClick={(evt) => {
                 evt.preventDefault();
-                if (isPlaying) {
-                  onPause();
-                } else {
-                  onPlay();
-                }
+                onPlay();
               }}
             >
               {isPlaying ?
@@ -47,7 +43,15 @@ const FullVideoPlayer = (props) => {
             </button>
             <div className="player__name">Transpotting</div>
 
-            <button type="button" className="player__full-screen">
+            <button type="button" className="player__full-screen"
+              onClick={
+                (evt) => {
+                  if (document.fullscreen) {
+                    document.exitFullscreen();
+                  }
+                  evt.target.requestFullscreen();
+                }}
+            >
               <svg viewBox="0 0 27 27" width="27" height="27">
                 <use xlinkHref="#full-screen"></use>
               </svg>
@@ -66,4 +70,4 @@ FullVideoPlayer.propTypes = {
 };
 
 export {FullVideoPlayer};
-export default withVideo(FullVideoPlayer);
+export default withFullVideo(FullVideoPlayer);

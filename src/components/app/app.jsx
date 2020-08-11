@@ -59,6 +59,7 @@ class App extends PureComponent {
           <MoviePage
             movie={this._movieDetails}
             movies={movies}
+            onPlayVideoClick={this._openFullVideo}
           />
         );
       case ShowingPage.FULL_VIDEO:

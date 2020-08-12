@@ -165,16 +165,19 @@ App.propTypes = {
   movies: PropTypes.arrayOf(
       PropTypes.shape(
           {
-            title: PropTypes.string.isRequired,
-            image: PropTypes.string.isRequired
+            title: PropTypes.string,
+            image: PropTypes.string
           }
-      ).isRequired
-  ).isRequired,
+      )
+  ),
   genres: PropTypes.array.isRequired,
   currentGenre: PropTypes.string,
   onGenreClick: PropTypes.func,
   currentShowNumber: PropTypes.number,
-  onShowMoreClick: PropTypes.func
+  onShowMoreClick: PropTypes.func,
+  auth: PropTypes.shape(),
+  onSignInSubmit: PropTypes.func,
+  onReviewSubmit: PropTypes.func
 };
 
 const mapStateToProps = (state) => ({

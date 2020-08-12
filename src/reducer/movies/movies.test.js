@@ -4,7 +4,8 @@ describe(`Reducer`, () => {
   it(`Return initial state`, () => {
     expect(reducer(void 0, {})).toEqual({
       movies: [],
-      promoMovie: {}
+      promoMovie: {},
+      reviews: null
     });
   });
 });

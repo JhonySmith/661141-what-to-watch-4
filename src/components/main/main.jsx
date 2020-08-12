@@ -17,7 +17,7 @@ const Main = (props) => {
           <img src={promoMovie.backgroundPoster} alt={promoMovie.title} />
         </div>
 
-        <Header 
+        <Header
           auth={auth}
           onSignInClick={onSignInClick}
         />
@@ -38,7 +38,7 @@ const Main = (props) => {
               </p>
 
               <div className="movie-card__buttons">
-                <button className="btn btn--play movie-card__button" 
+                <button className="btn btn--play movie-card__button"
                   onClick={(evt) => {
                     evt.preventDefault();
                     onPlayVideoClick(promoMovie);
@@ -106,13 +106,13 @@ const Main = (props) => {
 Main.propTypes = {
   promoMovie: PropTypes.shape(
       {
-        title: PropTypes.string.isRequired,
-        filmPoster: PropTypes.string.isRequired,
-        genre: PropTypes.string.isRequired,
-        year: PropTypes.number.isRequired,
-        backgroundPoster: PropTypes.string.isRequired,
+        title: PropTypes.string,
+        filmPoster: PropTypes.string,
+        genre: PropTypes.string,
+        year: PropTypes.number,
+        backgroundPoster: PropTypes.string,
       }
-  ).isRequired,
+  ),
   movies: PropTypes.arrayOf(
       PropTypes.shape(
           {
@@ -135,7 +135,10 @@ Main.propTypes = {
   filters: PropTypes.array,
   genres: PropTypes.array.isRequired,
   onGenreClick: PropTypes.func.isRequired,
-  currentGenre: PropTypes.string.isRequired
+  currentGenre: PropTypes.string.isRequired,
+  onPlayVideoClick: PropTypes.func.isRequired,
+  auth: PropTypes.shape().isRequired,
+  onSignInClick: PropTypes.func.isRequired
 };
 
 export default Main;

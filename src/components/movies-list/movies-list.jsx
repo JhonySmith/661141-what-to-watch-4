@@ -31,7 +31,7 @@ MoviesList.propTypes = {
             image: PropTypes.string.isRequired
           }
       ).isRequired
-  ).isRequired,
+  ),
   onTitleClick: PropTypes.func.isRequired
 };
 

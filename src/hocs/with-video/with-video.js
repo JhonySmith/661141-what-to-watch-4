@@ -32,7 +32,6 @@ const withVideo = (Component) => {
 
     render() {
       const {movie, videoWidth, videoHeight} = this.props;
-      const {isPlaing} = this.state;
 
       return (
         <Component
@@ -86,9 +85,9 @@ const withVideo = (Component) => {
 
   WithVideo.propTypes = {
     movie: PropTypes.shape({
-      image: PropTypes.string.isRequired,
-      preview: PropTypes.string.isRequired
-    }).isRequired,
+      image: PropTypes.string,
+      preview: PropTypes.string
+    }),
     muted: PropTypes.bool,
     videoWidth: PropTypes.number,
     videoHeight: PropTypes.number

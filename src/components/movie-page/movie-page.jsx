@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes, {exact} from "prop-types";
+import PropTypes from "prop-types";
 import MoviePageTabs from "../movie-page-tabs/movie-page-tabs.jsx";
 import Header from "../header/header.jsx";
 
@@ -133,14 +133,17 @@ MoviePage.propTypes = {
     description: PropTypes.string.isRequired,
     director: PropTypes.string.isRequired,
     starring: PropTypes.array.isRequired
-  }).isRequired,
+  }),
   movies: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     image: PropTypes.string.isRequired,
     genre: PropTypes.string.isRequired,
     filter: PropTypes.func
   })),
-  onPlayVideoClick: PropTypes.func
+  onPlayVideoClick: PropTypes.func,
+  auth: PropTypes.shape(),
+  onSignInClick: PropTypes.func,
+  openReview: PropTypes.func
 };
 
 export default MoviePage;

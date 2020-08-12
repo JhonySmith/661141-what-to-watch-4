@@ -30,6 +30,9 @@ const TestData = {
     }],
 };
 
+const auth = {
+  isAuth: true,
+};
 
 const genres = [`All genres`, `Horror`, `Comedies`];
 
@@ -47,6 +50,12 @@ describe(`Main page e2e tests`, () => {
           currentGenre={allGenres}
           onTitleClick={onTitleClick}
           onGenreClick={() => { }}
+          onPlayVideoClick={() => {}}
+          onSignInClick={() => {}}
+          showingMovies={TestData.MOVIES}
+          currentShowNumber={2}
+          onShowMoreClick={() => {}}
+          auth={auth}
         />
     );
 

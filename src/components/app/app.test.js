@@ -31,6 +31,10 @@ const genresTest = [`All genres`, `Horror`, `Comedies`];
 
 const allGenres = `All genres`;
 
+const auth = {
+  isAuth: true,
+};
+
 describe(`App unit tests`, () => {
   const store = mockStore({
   });
@@ -47,6 +51,9 @@ describe(`App unit tests`, () => {
               genres = {genresTest}
               currentGenre = {allGenres}
               onGenreClick = {() => {}}
+              auth={auth}
+              currentShowNumber={2}
+              onShowMoreClick={() => {}}
             />
           </Provider>, {
             createNodeMock: () => {

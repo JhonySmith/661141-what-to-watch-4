@@ -27,6 +27,10 @@ const genres = [`All genres`, `Horror`, `Comedies`];
 
 const allGenres = `All genres`;
 
+const auth = {
+  isAuth: true,
+};
+
 describe(`Main page unit tests`, () => {
   it(`Render main page`, () => {
     const tree = renderer
@@ -38,6 +42,12 @@ describe(`Main page unit tests`, () => {
             currentGenre={allGenres}
             onTitleClick={() => {}}
             onGenreClick={() => {}}
+            showingMovies={TestData.MOVIES}
+            currentShowNumber={2}
+            onShowMoreClick={() => {}}
+            auth={auth}
+            onSignInClick={() => {}}
+            onPlayVideoClick={() => {}}
           />, {
             createNodeMock: () => {
               return {};

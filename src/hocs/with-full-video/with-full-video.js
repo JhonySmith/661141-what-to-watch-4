@@ -94,9 +94,9 @@ const withVideo = (Component) => {
 
   WithVideo.propTypes = {
     movie: PropTypes.shape({
-      image: PropTypes.string.isRequired,
-      preview: PropTypes.string.isRequired
-    }).isRequired,
+      image: PropTypes.string,
+      preview: PropTypes.string
+    }),
     muted: PropTypes.bool,
   };
 

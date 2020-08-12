@@ -64,13 +64,9 @@ const Operation = {
   },
 
   postReview: (review, movieId) => (dispatch, getState, api) => {
-    console.log(123);
-    console.log(review);
-    console.log(movieId);
     return api.post(`/comments/${movieId}`, ReviewAdapter.toPost(review))
       .then((response) => {
         const reviews = ReviewAdapter.parse(response.data);
-        console.log(reviews);
         dispatch(ActionCreator.getReviews(reviews));
       });
   },

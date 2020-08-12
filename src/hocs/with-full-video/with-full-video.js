@@ -13,7 +13,7 @@ const withVideo = (Component) => {
         progress: 0,
         isPlaying: false,
         duration: 0,
-        valueCount: 0
+        valueCount: null
       };
 
       this._handlePlay = this._handlePlay.bind(this);

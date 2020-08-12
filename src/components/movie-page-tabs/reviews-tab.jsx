@@ -7,7 +7,7 @@ const ReviewTab = () => {
         <div className="movie-card__reviews-col">
           <div className="review">
             <blockquote className="review__quote">
-              <p className="review__text">Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director's funniest and most exquisitely designed movies in years.</p>
+              <p className="review__text">Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the directors funniest and most exquisitely designed movies in years.</p>
 
               <footer className="review__details">
                 <cite className="review__author">Kate Muir</cite>

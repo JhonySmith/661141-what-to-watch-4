@@ -4,7 +4,7 @@ import withFullVideo from "../../hocs/with-full-video/with-full-video.js";
 import {getTimeEnd} from "../../utils/get-time-end.js";
 
 const FullVideoPlayer = (props) => {
-  const {movie, onPlay, isPlaying, progress, duration, valueCount} = props;
+  const {onPlay, isPlaying, progress, duration, valueCount} = props;
 
   return (
     <>
@@ -68,6 +68,11 @@ const FullVideoPlayer = (props) => {
 FullVideoPlayer.propTypes = {
   movie: PropTypes.shape(),
   children: PropTypes.element.isRequired,
+  onPlay: PropTypes.func,
+  isPlaying: PropTypes.bool,
+  progress: PropTypes.number,
+  duration: PropTypes.number,
+  valueCount: PropTypes.string
 };
 
 export {FullVideoPlayer};

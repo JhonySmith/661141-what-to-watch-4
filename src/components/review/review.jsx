@@ -1,6 +1,7 @@
 import React from "react";
 import Header from "../header/header.jsx";
 import withComments from "../../hocs/with-comments/with-comments.js";
+import PropTypes from "prop-types";
 
 const Review = (props) => {
   const {
@@ -95,6 +96,22 @@ const Review = (props) => {
 
     </section>
   );
+};
+
+Review.propTypes = {
+  movie: PropTypes.shape({
+    title: PropTypes.string,
+    backgroundPoster: PropTypes.string,
+    backgroundColor: PropTypes.string,
+    image: PropTypes.string,
+  }),
+  starsCount: PropTypes.number,
+  isSubmitButtonEnabled: PropTypes.bool,
+  onStarsChange: PropTypes.func,
+  onCommentInput: PropTypes.func,
+  onSubmit: PropTypes.func,
+  auth: PropTypes.shape(),
+  onSignInClick: PropTypes.func,
 };
 
 export {Review};

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Header = (props) => {
   const {auth, onSignInClick} = props;
@@ -38,6 +39,15 @@ const Header = (props) => {
           </header>
   </>
   );
+};
+
+Header.propTypes = {
+  auth: PropTypes.shape({
+    isAuth: PropTypes.bool,
+    avatar: PropTypes.string
+  }
+  ),
+  onSignInClick: PropTypes.func
 };
 
 export default Header;

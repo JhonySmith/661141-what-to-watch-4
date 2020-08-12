@@ -1,4 +1,5 @@
 import React, {PureComponent} from "react";
+import PropTypes from "prop-types";
 
 class SignIn extends PureComponent {
   constructor(props) {
@@ -96,5 +97,10 @@ class SignIn extends PureComponent {
     openMain();
   }
 }
+
+SignIn.propTypes = {
+  onSignInSubmit: PropTypes.func,
+  openMain: PropTypes.func
+};
 
 export default SignIn;

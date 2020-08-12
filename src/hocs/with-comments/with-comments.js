@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const MIN_COMMENT_LENGTH = 50;
 const MAX_COMMENT_LENGTH = 400;
@@ -70,6 +71,10 @@ const withComments = (Component) => {
       );
     }
   }
+
+  WithComments.propTypes = {
+    onSubmit: PropTypes.func
+  };
 
   return WithComments;
 };

@@ -3,7 +3,7 @@ import UserAdapter from "../../adapters/user";
 
 const initialState = {
   auth: {
-    authorizationStatus: false,
+    isAuth: false,
   }
 };
 
@@ -25,7 +25,7 @@ const Operation = {
     return api.get(`/login`)
       .then((response) => {
         dispatch(ActionCreator.getAuthStatus(extend({
-          authorizationStatus: true,
+          isAuth: true,
         }, UserAdapter.parse(response.data))));
       });
   },
@@ -34,7 +34,7 @@ const Operation = {
     return api.post(`/login`, UserAdapter.toPost(authData))
       .then((response) => {
         dispatch(ActionCreator.getAuthStatus(extend({
-          authorizationStatus: true,
+          isAuth: true,
         }, UserAdapter.parse(response.data))));
       });
   },

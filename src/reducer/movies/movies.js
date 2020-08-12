@@ -1,14 +1,17 @@
 import extend from "../../utils/commons";
 import movieAdapter from "../../adapters/movie-adapter.js";
+import ReviewAdapter from "../../adapters/review.js";
 
 const initialState = {
   movies: [],
-  promoMovie: {}
+  promoMovie: {},
+  reviews: null
 };
 
 const ActionType = {
   GET_MOVIES: `GET_MOVIES`,
-  GET_PROMO_MOVIE: `GET_PROMO_MOVIE`
+  GET_PROMO_MOVIE: `GET_PROMO_MOVIE`,
+  GET_REVIEWS: `GET_REVIEWS`
 };
 
 const ActionCreator = {
@@ -24,6 +27,13 @@ const ActionCreator = {
     return {
       type: ActionType.GET_PROMO_MOVIE,
       payload: promoMovie
+    };
+  },
+
+  getReviews: (reviews) => {
+    return {
+      type: ActionType.GET_REVIEWS,
+      payload: reviews
     };
   }
 };
@@ -41,7 +51,17 @@ const Operation = {
       .then((response) => {
         dispatch(ActionCreator.getPromoMovie(movieAdapter(response.data)));
       });
-  }
+  },
+
+  getReviews: (movieId) => (dispatch, getState, api) => {
+    dispatch(ActionCreator.getReviews(null));
+
+    return api.get(`/comments/${movieId}`)
+      .then((response) => {
+        const reviews = ReviewAdapter.parse(response.data);
+        dispatch(ActionCreator.getReviews(reviews));
+      });
+  },
 };
 
 const reducer = (state = initialState, action) => {
@@ -55,6 +75,11 @@ const reducer = (state = initialState, action) => {
     case ActionType.GET_PROMO_MOVIE:
       return extend(state, {
         promoMovie: action.payload
+      });
+
+    case ActionType.GET_REVIEWS:
+      return extend(state, {
+        reviews: action.payload,
       });
 
     default:

@@ -79,6 +79,8 @@ class App extends PureComponent {
             movie={this._movieDetails}
             movies={movies}
             onPlayVideoClick={this._openFullVideo}
+            auth={auth}
+            onSignInClick={this._openSignIn}
           />
         );
       case ShowingPage.FULL_VIDEO:

@@ -14,12 +14,14 @@ import {Operation} from "../../reducer/user/user.js";
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
 import SignIn from '../sign-in/sign-in.jsx';
+import Review from "../review/review.jsx";
 
 const ShowingPage = {
   MAIN: `main`,
   DETAILS: `deatils`,
   FULL_VIDEO: `fullVideo`,
-  AUTH_FORM: `authForm`
+  AUTH_FORM: `authForm`,
+  REVIEW: `review`
 };
 
 class App extends PureComponent {
@@ -37,6 +39,7 @@ class App extends PureComponent {
     this._openFullVideo = this._openFullVideo.bind(this);
     this._openSignIn = this._openSignIn.bind(this);
     this._openMain = this._openMain.bind(this);
+    this._openReview = this._openReview.bind(this);
   }
 
   _openMain() {
@@ -67,6 +70,12 @@ class App extends PureComponent {
     });
   }
 
+  _openReview() {
+    this.setState({
+      showingPage: ShowingPage.REVIEW
+    });
+  }
+
   _renderApp() {
     const {movies, genres, promoMovie, currentGenre, onGenreClick, currentShowNumber, onShowMoreClick, auth, onSignInSubmit} = this.props;
     const {showingPage} = this.state;
@@ -81,6 +90,7 @@ class App extends PureComponent {
             onPlayVideoClick={this._openFullVideo}
             auth={auth}
             onSignInClick={this._openSignIn}
+            openReview={this._openReview}
           />
         );
       case ShowingPage.FULL_VIDEO:
@@ -98,6 +108,16 @@ class App extends PureComponent {
             openMain={this._openMain}
           />
         );
+
+      case ShowingPage.REVIEW:
+        return (
+          <Review
+            auth={auth}
+            onSignInClick={this._openSignIn}
+            movie={this._movieDetails}
+          />
+        );
+
       default:
         return (
           <Main

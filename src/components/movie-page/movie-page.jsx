@@ -1,10 +1,10 @@
 import React from "react";
-import PropTypes from "prop-types";
+import PropTypes, { exact } from "prop-types";
 import MoviePageTabs from "../movie-page-tabs/movie-page-tabs.jsx";
 import Header from "../header/header.jsx";
 
 const MoviePage = (props) => {
-  const {movie, movies, onPlayVideoClick, auth, onSignInClick} = props;
+  const { movie, movies, onPlayVideoClick, auth, onSignInClick, openReview} = props;
 
   return (
       <>
@@ -51,7 +51,12 @@ const MoviePage = (props) => {
                     <span>My list</span>
                   </button>
 
-                  <a href="add-review.html" className="btn movie-card__button">Add review</a>
+                  <a href="add-review.html" className="btn movie-card__button"
+                    onClick={(evt) => {
+                      evt.preventDefault();
+                      openReview();
+                    }}
+                  >Add review</a>
                 </div>
               </div>
             </div>

@@ -16,7 +16,7 @@ import {createAPI} from "./utils/api.js";
 import App from "./components/app/app.jsx";
 
 const onUnauthorized = () => store.dispatch(ActionCreator.getAuthStatus({
-    authorizationStatus: false,
+  isAuth: false,
 }));
 
 const api = createAPI(onUnauthorized);

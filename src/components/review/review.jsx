@@ -4,10 +4,8 @@ import withComments from "../../hocs/with-comments/with-comments.js";
 
 const Review = (props) => {
   const {
-    userInfo,
     movie,
     starsCount,
-    onMoviePageClick,
     isSubmitButtonEnabled,
     onStarsChange,
     onCommentInput,
@@ -16,24 +14,14 @@ const Review = (props) => {
     onSignInClick
   } = props;
 
-  const {
-    filmTitle,
-    image,
-  } = film;
-
-  const handleMoviePageClick = (evt) => {
-    evt.preventDefault();
-    onMoviePageClick();
-  };
-
   return (
     <section className="movie-card movie-card--full">
       <div className="movie-card__header">
         <div className="movie-card__bg">
           <img
-            alt={filmTitle}
-            src={image.background}
-            style={{backgroundColor: image.backgroundColor}}
+            alt={movie.title}
+            src={movie.backgroundPoster}
+            style={{backgroundColor: movie.backgroundColor}}
           />
         </div>
 
@@ -46,8 +34,8 @@ const Review = (props) => {
 
         <div className="movie-card__poster movie-card__poster--small">
           <img
-            src={image.poster}
-            alt={`${filmTitle} poster`}
+            src={movie.image}
+            alt={`${movie.title} poster`}
             width="218" height="327"
           />
         </div>

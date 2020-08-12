@@ -1,10 +1,10 @@
 import React from "react";
-import PropTypes, { exact } from "prop-types";
+import PropTypes, {exact} from "prop-types";
 import MoviePageTabs from "../movie-page-tabs/movie-page-tabs.jsx";
 import Header from "../header/header.jsx";
 
 const MoviePage = (props) => {
-  const { movie, movies, onPlayVideoClick, auth, onSignInClick, openReview} = props;
+  const {movie, movies, onPlayVideoClick, auth, onSignInClick, openReview} = props;
 
   return (
       <>

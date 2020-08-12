@@ -10,6 +10,7 @@ import filters from "../../constants/filters";
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 
 import {Operation} from "../../reducer/user/user.js";
+import {Operation as MovieOperation} from "../../reducer/movies/movies.js";
 
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
@@ -77,7 +78,7 @@ class App extends PureComponent {
   }
 
   _renderApp() {
-    const {movies, genres, promoMovie, currentGenre, onGenreClick, currentShowNumber, onShowMoreClick, auth, onSignInSubmit} = this.props;
+    const {movies, genres, promoMovie, currentGenre, onGenreClick, currentShowNumber, onShowMoreClick, auth, onSignInSubmit, onReviewSubmit} = this.props;
     const {showingPage} = this.state;
     const showingMovies = (currentGenre !== filters.ALL ? movies.filter((movie) => movie.genre === currentGenre) : movies);
 
@@ -110,11 +111,13 @@ class App extends PureComponent {
         );
 
       case ShowingPage.REVIEW:
+        const handleReviewSubmit = (review) => onReviewSubmit(review, this._movieDetails.id);
         return (
           <Review
             auth={auth}
             onSignInClick={this._openSignIn}
             movie={this._movieDetails}
+            onSubmit={handleReviewSubmit}
           />
         );
 
@@ -193,6 +196,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onSignInSubmit(authData) {
     dispatch(Operation.login(authData));
+  },
+  onReviewSubmit(review, filmId) {
+    dispatch(MovieOperation.postReview(review, filmId));
   },
 });
 

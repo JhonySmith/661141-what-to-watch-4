@@ -41,6 +41,7 @@ const withComments = (Component) => {
     _handleSubmit(evt) {
       const {currentStarValue, comment} = this.state;
       const rating = currentStarValue * (MAX_RATING_SCORE / STARS_COUNT);
+      console.log(rating);
 
       evt.preventDefault();
 

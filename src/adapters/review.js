@@ -9,7 +9,7 @@ export default {
   })),
 
   toPost: (review) => ({
-    "raiting": review.raiting,
+    "rating": review.rating,
     "comment": review.comment,
   }),
 };

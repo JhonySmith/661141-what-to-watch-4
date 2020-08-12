@@ -7,7 +7,9 @@ import ShowMoreButton from "../show-more-button/show-more-button.jsx";
 
 
 const Main = (props) => {
-  const {promoMovie, movies, genres, currentGenre, onGenreClick, onTitleClick, showingMovies, currentShowNumber, onShowMoreClick, onPlayVideoClick} = props;
+  const {promoMovie, movies, genres, currentGenre, onGenreClick, onTitleClick, showingMovies, currentShowNumber, onShowMoreClick, onPlayVideoClick, auth, onSignInClick} = props;
+
+  console.log(auth);
 
   return (
     <>
@@ -28,9 +30,25 @@ const Main = (props) => {
           </div>
 
           <div className="user-block">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-            </div>
+            {auth.authorizationStatus
+              ? (
+                <div className="user-block__avatar">
+                  <img
+                    src={auth.avatar}
+                    alt="User avatar"
+                    width="63" height="63"
+                  />
+                </div>
+              ) : (
+                <a
+                  onClick={onSignInClick}
+                  href="#"
+                  className="user-block__link"
+                >
+                  Sign in
+                </a>
+              )
+            }
           </div>
         </header>
 

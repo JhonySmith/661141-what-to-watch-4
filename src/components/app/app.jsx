@@ -4,17 +4,22 @@ import {connect} from 'react-redux';
 import {ActionCreator} from "../../reducer/state/state";
 import {getMovies, getAllGenres, getPromoMovie} from "../../reducer/movies/selectors";
 import {getCurrentGenre, getCurrentShowNumber} from "../../reducer/state/selectors";
+import {getAuthStatus} from "../../reducer/user/selectors";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import filters from "../../constants/filters";
 import FullVideoPlayer from "../full-video-player/full-video-player.jsx";
 
+import {Operation} from "../../reducer/user/user.js";
+
 import Main from "../main/main.jsx";
 import MoviePage from "../movie-page/movie-page.jsx";
+import SignIn from '../sign-in/sign-in.jsx';
 
 const ShowingPage = {
   MAIN: `main`,
   DETAILS: `deatils`,
-  FULL_VIDEO: `fullVideo`
+  FULL_VIDEO: `fullVideo`,
+  AUTH_FORM: `authForm`
 };
 
 class App extends PureComponent {
@@ -30,6 +35,14 @@ class App extends PureComponent {
 
     this._openMovieDetails = this._openMovieDetails.bind(this);
     this._openFullVideo = this._openFullVideo.bind(this);
+    this._openSignIn = this._openSignIn.bind(this);
+    this._openMain = this._openMain.bind(this);
+  }
+
+  _openMain() {
+    this.setState({
+      showingPage: ShowingPage.MAIN
+    });
   }
 
   _openMovieDetails(movie) {
@@ -48,8 +61,14 @@ class App extends PureComponent {
     this._movieVideo = movie;
   }
 
+  _openSignIn() {
+    this.setState({
+      showingPage: ShowingPage.AUTH_FORM
+    });
+  }
+
   _renderApp() {
-    const {movies, genres, promoMovie, currentGenre, onGenreClick, currentShowNumber, onShowMoreClick} = this.props;
+    const {movies, genres, promoMovie, currentGenre, onGenreClick, currentShowNumber, onShowMoreClick, auth, onSignInSubmit} = this.props;
     const {showingPage} = this.state;
     const showingMovies = (currentGenre !== filters.ALL ? movies.filter((movie) => movie.genre === currentGenre) : movies);
 
@@ -70,6 +89,13 @@ class App extends PureComponent {
             videoHeight={``}
           />
         );
+      case ShowingPage.AUTH_FORM:
+        return (
+          <SignIn
+            onSignInSubmit={onSignInSubmit}
+            openMain={this._openMain}
+          />
+        );
       default:
         return (
           <Main
@@ -83,6 +109,8 @@ class App extends PureComponent {
             currentShowNumber={currentShowNumber}
             onShowMoreClick={onShowMoreClick}
             onPlayVideoClick={this._openFullVideo}
+            auth={auth}
+            onSignInClick={this._openSignIn}
           />);
     }
   }
@@ -98,6 +126,9 @@ class App extends PureComponent {
         </Route>
         <Route exact path="/movie-video">
           <FullVideoPlayer />
+        </Route>
+        <Route exact path="/sign-in">
+          <SignIn />
         </Route>
       </Switch>
     </BrowserRouter>;
@@ -126,7 +157,8 @@ const mapStateToProps = (state) => ({
   promoMovie: getPromoMovie(state),
   genres: getAllGenres(state),
   currentGenre: getCurrentGenre(state),
-  currentShowNumber: getCurrentShowNumber(state)
+  currentShowNumber: getCurrentShowNumber(state),
+  auth: getAuthStatus(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -136,7 +168,10 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onShowMoreClick(currentShowNumber) {
     dispatch(ActionCreator.increaseShowNumber(currentShowNumber));
-  }
+  },
+  onSignInSubmit(authData) {
+    dispatch(Operation.login(authData));
+  },
 });
 
 export {App};

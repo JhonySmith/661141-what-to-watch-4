@@ -9,12 +9,17 @@ import {composeWithDevTools} from "redux-devtools-extension";
 
 import reducer from "./reducer/reducer.js";
 import {Operation as MoviesOperation} from "./reducer/movies/movies.js";
+import {ActionCreator} from "./reducer/user/user.js";
 
 import {createAPI} from "./utils/api.js";
 
 import App from "./components/app/app.jsx";
 
-const api = createAPI(() => { });
+const onUnauthorized = () => store.dispatch(ActionCreator.getAuthStatus({
+    authorizationStatus: false,
+}));
+
+const api = createAPI(onUnauthorized);
 
 const store = createStore(
     reducer,
